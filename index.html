@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8">
+  <title>𝕸𝖚𝖘𝖎𝖈💕𝕮𝖍𝖔ἱ𝖈𝖊𝖘</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <style>
+    html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background-color: #000000; position: relative; }
+    
+    /* 1. Το "παράθυρο" αποκοπής που καλύπτει όλη την οθόνη */
+    .widget-window {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* 2. Zoom-In (1.55) με κλείδωμα στην κορυφή για να φαίνεται ολόκληρο το επάνω μέρος */
+    .fullscreen-widget {
+        width: 100vw;
+        height: 100vh;
+        border: none;
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        transform: scale(1.55); 
+        transform-origin: center top; 
+    }
+    
+    /* 3. ΑΚΡΙΒΕΣ ΚΑΤΩ ΚΑΛΥΜΜΑ: Στα 85px που ζητήσατε */
+    .hide-bottom-controls {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 85px; /* ΑΛΛΑΓΗ: Μειώθηκε στα 85px */
+        background-color: #000000;
+        z-index: 10;
+    }
+    
+    /* Το αγαπημένο σας ωοειδές κουμπί PLAY στην πάνω δεξιά γωνία */
+    .custom-play-btn {
+        position: absolute;
+        top: 3cm; 
+        right: 2cm; 
+        z-index: 9999; 
+        background-color: rgba(0, 255, 255, 0.5); 
+        color: #000000;
+        border: 3px solid #0000ff; 
+        outline: 3px solid #ff0000; 
+        outline-offset: 0px;
+        padding: 10px 25px;
+        font-family: Arial, sans-serif;
+        font-weight: bold;
+        font-size: 1.1rem;
+        cursor: pointer;
+        border-radius: 50px; 
+        box-shadow: 0 0 20px rgba(0, 255, 255, 0.7);
+        transition: all 0.3s ease;
+    }
+    
+    .custom-play-btn:hover {
+        background-color: rgba(128, 0, 128, 0.6); 
+        border-color: #0000ff;
+        outline-color: #ff0000;
+        color: #ffffff;
+        box-shadow: 0 0 25px rgba(200, 0, 255, 0.9);
+    }
+  </style>
+</head>
+<body>
+
+<!-- Το Full Screen κέλυφος με το widget -->
+<div class="widget-window">
+    <iframe class="fullscreen-widget" src="https://players.rcast.net/square/200586" scrolling="no"></iframe>
+</div>
+
+<!-- Το κάτω κάλυμμα στα 85px -->
+<div class="hide-bottom-controls"></div>
+
+<!-- Το Custom Κουμπί PLAY -->
+<button class="custom-play-btn" id="playBtn">PLAY</button>
+
+<script>
+  (function(){
+    const playBtn = document.getElementById('playBtn');
+    
+    // Αποκωδικοποίηση της ζωντανής ροής ήχου στην μνήμη (Κρυφό)
+    const _streamUrl = atob('aHR0cHM6Ly9zdHJlYW0ucmNhc3QubmV0LzIwMDU4Ng=='); 
+    const audio = new Audio();
+
+    playBtn.addEventListener('click', function() {
+        audio.src = _streamUrl;
+        audio.play().catch(e => console.log('Playback error handled.'));
+        this.style.display = 'none'; // Εξαφάνιση κουμπιού μετά το κλικ
+    });
+
+    // Προστασία Κώδικα
+    document.addEventListener('contextmenu', e => e.preventDefault());
+    document.addEventListener('dragstart', e => e.preventDefault());
+    document.addEventListener('keydown', function(e) {
+        if (e.keyCode === 123) { e.preventDefault(); return false; }
+        if (e.ctrlKey && (e.shiftKey && (e.keyCode === 73 || e.keyCode === 74) || e.keyCode === 85 || e.keyCode === 83 || e.keyCode === 67 || e.keyCode === 88)) {
+            e.preventDefault(); return false;
+        }
+    });
+
+    // Anti-Debugging Loop
+    setInterval(function() {
+        const start = new Date(); debugger; const end = new Date();
+        if (end - start > 100) { while (true) { console.log("Security"); } }
+    }, 500);
+  })();
+</script>
+</body>
+</html>
